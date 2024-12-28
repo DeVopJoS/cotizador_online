@@ -40,7 +40,7 @@
 
         public function update_contacto($cli_id, $car_id, $con_nom, $con_correo, $con_tel, $con_id){
             $conectar = parent::conexion();
-            $sql = "UPDATE tm_contacto SET cli_id=?, car_id=?, con_nom=?, con_correo=?, con_correo=? WHERE con_id=?";
+            $sql = "UPDATE tm_contacto SET cli_id=?, car_id=?, con_nom=?, con_correo=?, con_tel=? WHERE con_id=?";
             $query = $conectar->prepare($sql);
             $query->bindValue(1, $cli_id);
             $query->bindValue(2, $car_id);

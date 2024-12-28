@@ -38,7 +38,7 @@
 
         public function update_producto($cat_id, $prod_nom, $prod_desc, $prod_precio, $prod_id){
             $conectar = parent::conexion();
-            $sql = "UPDATE tm_producto SET cat_id=?, prod_nom=?, prod_desc=?, prod_desc=? WHERE prod_id=?";
+            $sql = "UPDATE tm_producto SET cat_id=?, prod_nom=?, prod_desc=?, prod_precio=? WHERE prod_id=?";
             $query = $conectar->prepare($sql);
             $query->bindValue(1, $cat_id);
             $query->bindValue(2, $prod_nom);
