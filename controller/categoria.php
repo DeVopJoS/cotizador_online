@@ -19,8 +19,12 @@
                 $sub_array = array();
                 $sub_array[] = $row['cat_nom'];
                 $sub_array[] = $row['cat_desc'];
-                $sub_array[] = '<button type="button" onClick="editar('.$row['cat_id'].')" id="'.$row['cat_id'].'"></button>';
-                $sub_array[] = '<button type="button" onClick="eliminar('.$row['cat_id'].')" id="'.$row['cat_id'].'"></button>';
+                $sub_array[] = '<button type="button" onClick="editar('.$row['cat_id'].')" id="'.$row['cat_id'].'" class="btn btn-success btn-icon btn-circle">
+                                    <i class="fa fa-edit"></i>
+                                </button>';
+                $sub_array[] = '<button type="button" onClick="eliminar('.$row['cat_id'].')" id="'.$row['cat_id'].'" class="btn btn-danger btn-icon btn-circle">
+                                    <i class="fa fa-trash"></i>
+                                </button>';
                 $data[] = $sub_array;
             }
 
