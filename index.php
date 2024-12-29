@@ -43,6 +43,16 @@
 				</div>
 				<div class="login-content">
 					<form action="" method="POST" class="margin-bottom-0">
+
+						<?php
+							if(isset($_GET['m']) && $_GET['m'] == 2){
+								echo '<div class="alert alert-danger fade show"> 
+								<strong>Error:</strong> Datos incorrectos... 
+								<a href="#"><span class="close" data-dismiss="alert">x</span></a>
+								</div>';
+							}
+						?>
+							
 						<div class="form-group m-b-15">
 							<input type="text" class="form-control form-control-lg" id="usu_correo" name="usu_correo" placeholder="Correo Electrónico" required="">
 						</div>

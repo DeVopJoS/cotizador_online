@@ -21,10 +21,10 @@
                         $_SESSION['usu_id'] = $resultado['usu_id'];
                         $_SESSION['usu_nom'] = $resultado['usu_nom'];
                         $_SESSION['usu_ape'] = $resultado['usu_ape'];
-                        header('Location:'.Conectar::ruta().'/view/home');
+                        header('Location:'.Conectar::ruta().'/view');
                         exit();
                     }else {
-                        header('Location:'.Conectar::ruta());
+                        header('Location:'.Conectar::ruta().'?m=1');
                     }
                 }
             } else {
