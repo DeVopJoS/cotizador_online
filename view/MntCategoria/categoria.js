@@ -1,7 +1,87 @@
 let tabla;
 
 function init() {
+    $("#mnt_form").on("submit", (e) => {
+        guardaryeditar(e);
+    });
+}
 
+function guardaryeditar(e){
+    e.preventDefault();
+    let formData = new FormData($("#mnt_form")[0]);
+    $.ajax({
+        url:"../../controller/categoria.php?op=guardaryeditar",
+        type:"POST",
+        data:formData,
+        contentType:false,
+        processData:false,
+        success:function(data){
+            $("#mdlMnt").modal("hide");
+            $('#mdlCarga').modal('show');
+            setTimeout(() => {
+                $('#table_data').DataTable().ajax.reload();
+                $("#mnt_form")[0].reset();  
+                $('#mdlCarga').modal('hide');
+                $.gritter.add({
+                    title: "Success",
+                    text: "Registro guardado.",
+                    fade: true,
+                    speed: "medium"
+                });
+            }, "3000");
+        }
+    });
+}
+
+function eliminar(cat_id){   
+    swal({
+        title: 'Esta seguro?',
+        text: 'Esta seguro de eliminar el registro!',
+        icon: 'error',
+        buttons: {
+            cancel: {
+                text: 'Cancelar',
+                value: null,
+                visible: true,
+                className: 'btn btn-default',
+                closeModal: true,
+            },
+            confirm: {
+                text: 'Eliminar',
+                value: true,
+                visible: true,
+                className: 'btn btn-danger',
+                closeModal: true
+            }
+        }
+    }).then((isConfirm) => {
+        if(isConfirm) {
+            $.post("../../controller/categoria.php?op=eliminar",{cat_id:cat_id}, function(data){
+                $('#mdlCarga').modal('show');
+                setTimeout(() => {
+                    $('#table_data').DataTable().ajax.reload();
+                    $.gritter.add({
+                        title: "Success",
+                        text: "Registro eliminado con exito!",
+                        fade: true,
+                        speed: "medium"
+                    });
+                    $('#mdlCarga').modal('hide');
+                }, "3000");
+            });
+        }
+    });
+}
+
+function editar(cat_id){
+    $.post("../../controller/categoria.php?op=mostrar",{cat_id:cat_id}, function(data){
+        data = JSON.parse(data);
+        $("#cat_id").val(data.cat_id);
+        $("#cat_nom").val(data.cat_nom);
+        $("#cat_desc").val(data.cat_desc);
+    });
+    $("#mdlTitulo").html("Editar registro");
+    $("#mdlMnt").modal("show")
 }
 
 $(document).ready( () => {
@@ -51,6 +131,7 @@ $(document).ready( () => {
 });
 
 $(document).on('click', '#btnNuevo', () => {
+    $('#mdlTitulo').html('Nuevo registro');
     $('#mdlMnt').modal('show');
 });
 

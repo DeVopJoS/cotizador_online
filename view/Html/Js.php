@@ -15,3 +15,6 @@
 <script src="..\..\assets\plugins\pdfmake\build\vfs_fonts.js"></script>
 <script src="..\..\assets\plugins\jszip\dist\jszip.min.js"></script>
 <script src="..\..\assets\js\demo\table-manage-buttons.demo.js"></script>
+
+<script src="..\..\assets\plugins\sweetalert\dist\sweetalert.min.js"></script>
+<script src="..\..\assets\plugins\gritter\js\jquery.gritter.js"></script>

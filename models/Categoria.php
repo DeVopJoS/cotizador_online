@@ -28,12 +28,11 @@
         public function insert_categoria($cat_nom, $cat_desc){
             $conectar=parent::conexion();
             $sql="INSERT INTO tm_categoria (cat_id, cat_nom, cat_desc, estado) 
-            VALUES (NULL, ?, ?, '1');";
+            VALUES (NULL, ?, ?, 1);";
             $query=$conectar->prepare($sql);
             $query->bindValue(1,$cat_nom);
             $query->bindValue(2,$cat_desc);
             $query->execute();
-            return $query->fetchAll(PDO::FETCH_ASSOC);
         }
 
         public function update_categoria($cat_nom, $cat_desc,$cat_id){

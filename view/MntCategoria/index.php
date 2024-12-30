@@ -55,6 +55,9 @@
 	</div>
 	
 	<?php require_once("mdlMnt.php") ?>
+	
+	<?php require_once("../Html/modal.php") ?>
+
 	<?php require_once("../Html/Js.php") ?>
     <script src="categoria.js"></script>
 </body>

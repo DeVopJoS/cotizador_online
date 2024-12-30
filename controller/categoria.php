@@ -5,7 +5,7 @@
     $categoria = new Categoria();
     switch($_GET['op']){
         case 'guardaryeditar':
-            if(empty($_POST['cat_id']) && $_POST['cat_id'] > 0){
+            if(empty($_POST['cat_id'])){
                 $categoria->insert_categoria($_POST['cat_nom'], $_POST['cat_desc']);
             } else {
                 $categoria->update_categoria($_POST['cat_nom'], $_POST['cat_desc'], $_POST['cat_id']);
