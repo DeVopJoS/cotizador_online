@@ -60,6 +60,7 @@
 
         public function insert_usuario($usu_nom, $usu_ape, $usu_correo, $usu_pass){
             $conectar = parent::conexion();
+            parent::set_name();
             $sql = "INSERT INTO tm_usuario (usu_nom, usu_ape, usu_correo, usu_pass) VALUES(?,?,?,?)";
             $query = $conectar->prepare($sql);
             $query->bindValue(1, $usu_nom);

@@ -5,7 +5,7 @@
     $usuario = new Usuario();
     switch($_GET['op']){
         case 'guardaryeditar':
-            if(empty($_POST['usu_id']) && $_POST['usu_id'] > 0){
+            if(empty($_POST['usu_id'])){
                 $usuario->insert_usuario($_POST['usu_nom'], $_POST['usu_ape'], $_POST['usu_correo'], $_POST['usu_pass']);
             } else {
                 $usuario->update_usuario($_POST['usu_nom'], $_POST['usu_ape'], $_POST['usu_correo'], $_POST['usu_pass'], $_POST['usu_id']);
@@ -17,11 +17,14 @@
 
             foreach($datos as $row){
                 $sub_array = array();
-                $sub_array[] = $row['usu_nom'];
-                $sub_array[] = $row['usu_ape'];
+                $sub_array[] = $row['usu_nom']. ' '. $row['usu_ape'];
                 $sub_array[] = $row['usu_correo'];
-                $sub_array[] = '<button type="button" onClick="editar('.$row['usu_id'].')" id="'.$row['usu_id'].'"></button>';
-                $sub_array[] = '<button type="button" onClick="eliminar('.$row['usu_id'].')" id="'.$row['usu_id'].'"></button>';
+                $sub_array[] = '<button type="button" onClick="editar('.$row['usu_id'].')" id="'.$row['usu_id'].'" class="btn btn-success btn-icon btn-circle">
+                <i class="fa fa-edit"></i>
+                </button>';
+                $sub_array[] = '<button type="button" onClick="eliminar('.$row['usu_id'].')" id="'.$row['usu_id'].'" class="btn btn-danger btn-icon btn-circle">
+                <i class="fa fa-trash"></i>
+                </button>';
                 $data[] = $sub_array;
             }
 
@@ -39,6 +42,7 @@
                 foreach($datos as $row){
                     $output['usu_id'] = $row['usu_id'];
                     $output['usu_nom'] = $row['usu_nom'];
+                    $output['usu_ape'] = $row['usu_ape'];
                     $output['usu_correo'] = $row['usu_correo'];
                 }
 

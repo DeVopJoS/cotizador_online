@@ -131,6 +131,8 @@ $(document).ready( () => {
 });
 
 $(document).on('click', '#btnNuevo', () => {
+    $("#mnt_form")[0].reset();  
+    $("#cat_id").val("");
     $('#mdlTitulo').html('Nuevo registro');
     $('#mdlMnt').modal('show');
 });

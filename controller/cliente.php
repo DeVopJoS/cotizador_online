@@ -5,10 +5,10 @@
     $cliente = new Cliente();
     switch($_GET['op']){
         case 'guardaryeditar':
-            if(empty($_POST['cli_id']) && $_POST['cli_id'] > 0){
-                $cliente->insert_cliente($_POST['cli_nom'], $_POST['cli_ruc'], $_POST['cli_correo']);
+            if(empty($_POST['cli_id'])){
+                $cliente->insert_cliente($_POST['cli_nom'], $_POST['cli_ruc'], $_POST['cli_tel'], $_POST['cli_correo']);
             } else {
-                $cliente->update_cliente($_POST['cli_nom'], $_POST['cli_ruc'], $_POST['cli_correo'], $_POST['cli_id']);
+                $cliente->update_cliente($_POST['cli_nom'], $_POST['cli_ruc'], $_POST['cli_tel'], $_POST['cli_correo'], $_POST['cli_id']);
             }
             break;
         case 'listar':
@@ -19,9 +19,14 @@
                 $sub_array = array();
                 $sub_array[] = $row['cli_nom'];
                 $sub_array[] = $row['cli_ruc'];
+                $sub_array[] = $row['cli_tel'];
                 $sub_array[] = $row['cli_correo'];
-                $sub_array[] = '<button type="button" onClick="editar('.$row['cli_id'].')" id="'.$row['cli_id'].'"></button>';
-                $sub_array[] = '<button type="button" onClick="eliminar('.$row['cli_id'].')" id="'.$row['cli_id'].'"></button>';
+                $sub_array[] = '<button type="button" onClick="editar('.$row['cli_id'].')" id="'.$row['cli_id'].'" class="btn btn-success btn-icon btn-circle">
+                <i class="fa fa-edit"></i>
+                </button>';
+                $sub_array[] = '<button type="button" onClick="eliminar('.$row['cli_id'].')" id="'.$row['cli_id'].'" class="btn btn-danger btn-icon btn-circle">
+                <i class="fa fa-trash"></i>
+                </button>';
                 $data[] = $sub_array;
             }
 
@@ -40,7 +45,7 @@
                     $output['cli_id'] = $row['cli_id'];
                     $output['cli_nom'] = $row['cli_nom'];
                     $output['cli_ruc'] = $row['cli_ruc'];
-                    $output['cli_email'] = $row['cli_email'];
+                    $output['cli_correo'] = $row['cli_correo'];
                 }
 
                 echo json_encode($output);

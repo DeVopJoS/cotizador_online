@@ -25,25 +25,27 @@
             $query->execute();
         }
 
-        public function insert_cliente($cli_nom, $cli_ruc, $cli_correo){
+        public function insert_cliente($cli_nom, $cli_ruc, $cli_tel, $cli_correo){
             $conectar = parent::conexion();
-            $sql = "INSERT INTO tm_cliente (cli_nom, cli_ruc, cli_correo) 
-            VALUES(?,?,?)";
+            $sql = "INSERT INTO tm_cliente (cli_nom, cli_ruc, cli_tel, cli_correo) 
+            VALUES(?,?,?,?)";
             $query = $conectar->prepare($sql);
             $query->bindValue(1, $cli_nom);
             $query->bindValue(2, $cli_ruc);
-            $query->bindValue(3, $cli_correo);
+            $query->bindValue(3, $cli_tel);
+            $query->bindValue(4, $cli_correo);
             $query->execute();
         }
 
-        public function update_cliente($cli_nom, $cli_ruc, $cli_correo,$cli_id){
+        public function update_cliente($cli_nom, $cli_ruc, $cli_tel, $cli_correo,$cli_id){
             $conectar = parent::conexion();
-            $sql = "UPDATE tm_cliente SET cli_nom=?, cli_ruc=?, cli_correo=? WHERE cli_id=?";
+            $sql = "UPDATE tm_cliente SET cli_nom=?, cli_ruc=?, cli_tel=?, cli_correo=? WHERE cli_id=?";
             $query = $conectar->prepare($sql);
             $query->bindValue(1, $cli_nom);
             $query->bindValue(2, $cli_ruc);
-            $query->bindValue(3, $cli_correo);
-            $query->bindValue(4, $cli_id);
+            $query->bindValue(3, $cli_tel);
+            $query->bindValue(4, $cli_correo);
+            $query->bindValue(5, $cli_id);
             $query->execute();
         }
     }
