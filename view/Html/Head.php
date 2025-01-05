@@ -11,3 +11,5 @@
 <link href="..\..\assets\plugins\datatables.net-buttons-bs4\css\buttons.bootstrap4.min.css" rel="stylesheet">
 
 <link href="..\..\assets\plugins\gritter\css\jquery.gritter.css" rel="stylesheet">
+
+<link href="..\..\assets\plugins\select2\dist\css\select2.min.css" rel="stylesheet">

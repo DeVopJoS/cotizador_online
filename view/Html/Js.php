@@ -18,3 +18,5 @@
 
 <script src="..\..\assets\plugins\sweetalert\dist\sweetalert.min.js"></script>
 <script src="..\..\assets\plugins\gritter\js\jquery.gritter.js"></script>
+
+<script src="..\..\assets\plugins\select2\dist\js\select2.min.js"></script>

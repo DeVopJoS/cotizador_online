@@ -2,7 +2,9 @@
     class Producto extends Conectar{
         public function get_producto(){
             $conectar = parent::conexion();
-            $sql = "SELECT * FROM tm_producto WHERE estado = 1";
+            $sql = "SELECT tm_producto.*, tm_categoria.cat_nom FROM tm_producto 
+            INNER JOIN tm_categoria ON tm_categoria.cat_id = tm_producto.cat_id
+            WHERE tm_producto.estado = 1";
             $query = $conectar->prepare($sql);
             $query->execute();
             return $query->fetchAll(PDO::FETCH_ASSOC);

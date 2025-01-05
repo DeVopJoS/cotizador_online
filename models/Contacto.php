@@ -2,7 +2,10 @@
     class Contacto extends Conectar{
         public function get_contacto(){
             $conectar = parent::conexion();
-            $sql = "SELECT * FROM tm_contacto WHERE estado = 1";
+            $sql = "SELECT tm_contacto.*, tm_cargo.car_nom, tm_cliente.cli_nom 
+            FROM tm_contacto INNER JOIN tm_cliente ON tm_cliente.cli_id = tm_contacto.cli_id 
+            INNER JOIN tm_cargo ON tm_cargo.car_id = tm_contacto.car_id
+            WHERE tm_contacto.estado = 1";
             $query = $conectar->prepare($sql);
             $query->execute();
             return $query->fetchAll(PDO::FETCH_ASSOC);
@@ -27,8 +30,8 @@
 
         public function insert_contacto($cli_id, $car_id, $con_nom, $con_correo, $con_tel){
             $conectar = parent::conexion();
-            $sql = "INSERT INTO tm_contacto (con_nom, con_ruc, con_correo) 
-            VALUES(?,?,?)";
+            $sql = "INSERT INTO tm_contacto (cli_id, car_id, con_nom, con_correo, con_tel) 
+            VALUES(?,?,?,?,?)";
             $query = $conectar->prepare($sql);
             $query->bindValue(1, $cli_id);
             $query->bindValue(2, $car_id);

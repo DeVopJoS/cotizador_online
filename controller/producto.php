@@ -5,7 +5,7 @@
     $producto = new Producto();
     switch($_GET['op']){
         case 'guardaryeditar':
-            if(empty($_POST['prod_id']) && $_POST['prod_id'] > 0){
+            if(empty($_POST['prod_id'])){
                 $producto->insert_producto($_POST['cat_id'], $_POST['prod_nom'], $_POST['prod_desc'], $_POST['prod_precio']);
             } else {
                 $producto->update_producto($_POST['cat_id'], $_POST['prod_nom'], $_POST['prod_desc'], $_POST['prod_precio'], $_POST['prod_id']);
@@ -17,12 +17,16 @@
 
             foreach($datos as $row){
                 $sub_array = array();
-                $sub_array[] = $row['cat_id'];
+                $sub_array[] = $row['cat_nom'];
                 $sub_array[] = $row['prod_nom'];
                 $sub_array[] = $row['prod_desc'];
                 $sub_array[] = $row['prod_precio'];
-                $sub_array[] = '<button type="button" onClick="editar('.$row['prod_id'].')" id="'.$row['prod_id'].'"></button>';
-                $sub_array[] = '<button type="button" onClick="eliminar('.$row['prod_id'].')" id="'.$row['prod_id'].'"></button>';
+                $sub_array[] = '<button type="button" onClick="editar('.$row['prod_id'].')" id="'.$row['prod_id'].'" class="btn btn-success btn-icon btn-circle">
+                    <i class="fa fa-edit"></i>
+                </button>';
+                $sub_array[] = '<button type="button" onClick="eliminar('.$row['prod_id'].')" id="'.$row['prod_id'].'" class="btn btn-danger btn-icon btn-circle">
+                    <i class="fa fa-trash"></i>
+                </button>';
                 $data[] = $sub_array;
             }
 
