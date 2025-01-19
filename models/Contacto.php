@@ -53,5 +53,14 @@
             $query->bindValue(6, $con_id);
             $query->execute();
         }
+
+        public function get_contacto_x_cliente($cli_id){
+            $conectar = parent::conexion();
+            $sql = "SELECT * FROM tm_contacto WHERE cli_id = ? AND estado = 1";
+            $query = $conectar->prepare($sql);
+            $query->bindValue(1, $cli_id);
+            $query->execute();
+            return $query->fetchAll(PDO::FETCH_ASSOC);
+        }
     }
 ?>

@@ -55,8 +55,8 @@
         case 'eliminar':
             $producto->delete_producto($_POST['prod_id']);
             break;
-        case 'combo':
-            $datos = $producto->get_producto();
+        case 'combo_x_categoria':
+            $datos = $producto->get_producto_x_categoria($_POST['cat_id']);
             if(is_array($datos) && count($datos)>0){
                 $html = '';
                 $html .= '<option selected> Seleccionar </option>';

@@ -6,9 +6,16 @@
     switch($_GET['op']){
         case 'guardaryeditar':
             if(empty($_POST['cat_id'])){
-                $categoria->insert_categoria($_POST['cat_nom'], $_POST['cat_desc']);
+                $datos = $categoria->get_categoria_x_nom($_POST['cat_nom']);
+                if(is_array($datos) && count($datos) > 0){
+                    echo 'err';
+                } else {
+                    $categoria->insert_categoria($_POST['cat_nom'], $_POST['cat_desc']);
+                    echo 'ok';
+                }
             } else {
                 $categoria->update_categoria($_POST['cat_nom'], $_POST['cat_desc'], $_POST['cat_id']);
+                echo 'ok';
             }
             break;
         case 'listar':

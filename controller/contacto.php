@@ -57,8 +57,8 @@
         case 'eliminar':
             $contacto->delete_contacto($_POST['con_id']);
             break;
-        case 'combo':
-            $datos = $contacto->get_contacto();
+        case 'combo_cliente':
+            $datos = $contacto->get_contacto_x_cliente($_POST['cli_id']);
             if(is_array($datos) && count($datos)>0){
                 $html = '';
                 $html .= '<option selected> Seleccionar </option>';

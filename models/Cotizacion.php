@@ -1,0 +1,20 @@
+<?php
+    class Cotizacion extends Conectar {
+        
+        public function insert_cotizacion($cli_id, $con_id, $cli_ci, $con_tel, $con_email, $cot_descrip){
+            $conectar=parent::conexion();
+            $sql="CALL sp_i_cotizacion_01(?,?,?,?,?,?)";
+            $sql=$conectar->prepare($sql);
+            $sql->bindValue(1,$cli_id);
+            $sql->bindValue(2,$con_id);
+            $sql->bindValue(3,$cli_ci);
+            $sql->bindValue(4,$con_tel);
+            $sql->bindValue(5,$con_email);
+            $sql->bindValue(6,$cot_descrip);
+            $sql->execute();
+
+            return $sql->fetchAll();
+        }
+
+    }
+?>

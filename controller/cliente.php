@@ -57,10 +57,10 @@
         case 'combo':
             $datos = $cliente->get_cliente();
             if(is_array($datos) && count($datos)>0){
-                $html = '';
-                $html .= '<option selected> Seleccionar </option>';
+                $html = "";
+                $html .= "<option selected> Seleccionar </option>";
                 foreach($datos as $row){
-                    $html .= '<option value='. $row['cli_id'] .'> '. $row['cli_nom'] .' </option>';
+                    $html .= "<option value='". $row['cli_id'] ."'> ". $row['cli_nom'] ." </option>";
                 }
                 echo $html;
             }

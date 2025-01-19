@@ -44,5 +44,14 @@
             $query->bindValue(3,$cat_id);
             $query->execute();
         }
+
+        public function get_categoria_x_nom($cat_nom){
+            $conectar=parent::conexion();
+            $sql="SELECT * FROM tm_categoria WHERE cat_nom=?";
+            $query=$conectar->prepare($sql);
+            $query->bindValue(1,$cat_nom);
+            $query->execute();
+            return $query->fetchAll(PDO::FETCH_ASSOC);
+        }
     }
 ?>

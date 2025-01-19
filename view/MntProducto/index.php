@@ -40,7 +40,7 @@
 							<th class="text-nowrap">Categoría</th>
 							<th class="text-nowrap">Nombre</th>
 							<th class="text-nowrap">Descripción</th>
-							<th width="1%">Precio</th>
+							<th width="text-nowrap">Precio</th>
 							<th width="1%"></th>
 							<th width="1%"></th>
 						</tr>

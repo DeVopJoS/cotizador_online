@@ -17,18 +17,28 @@ function guardaryeditar(e){
         processData:false,
         success:function(data){
             $("#mdlMnt").modal("hide");
-            $('#mdlCarga').modal('show');
-            setTimeout(() => {
-                $('#table_data').DataTable().ajax.reload();
+            if(data === 'ok'){
+                $('#mdlCarga').modal('show');
+                setTimeout(() => {
+                    $('#table_data').DataTable().ajax.reload();
+                    $("#mnt_form")[0].reset();  
+                    $('#mdlCarga').modal('hide');
+                    $.gritter.add({
+                        title: "Success",
+                        text: "Registro guardado.",
+                        fade: true,
+                        speed: "medium"
+                    });
+                }, "3000");
+            } else {
                 $("#mnt_form")[0].reset();  
-                $('#mdlCarga').modal('hide');
                 $.gritter.add({
-                    title: "Success",
-                    text: "Registro guardado.",
+                    title: "Error",
+                    text: "Registro duplicado.",
                     fade: true,
                     speed: "medium"
                 });
-            }, "3000");
+            }
         }
     });
 }

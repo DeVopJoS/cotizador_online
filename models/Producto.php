@@ -49,5 +49,14 @@
             $query->bindValue(5, $prod_id);
             $query->execute();
         }
+
+        public function get_producto_x_categoria($cat_id){
+            $conectar = parent::conexion();
+            $sql = "SELECT * FROM tm_producto WHERE cat_id = ? AND estado = 1";
+            $query = $conectar->prepare($sql);
+            $query->bindValue(1, $cat_id);
+            $query->execute();
+            return $query->fetchAll(PDO::FETCH_ASSOC);
+        }
     }
 ?>
