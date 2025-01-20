@@ -16,5 +16,16 @@
             return $sql->fetchAll();
         }
 
+        public function insert_dcotizacion($cot_id, $cat_id, $prod_id, $cotd_precio, $cotd_cantidad){
+            $conectar=parent::conexion();
+            $sql="CALL sp_i_cotizacion_02(?,?,?,?,?)";
+            $sql=$conectar->prepare($sql);
+            $sql->bindValue(1,$cot_id);
+            $sql->bindValue(2,$cat_id);
+            $sql->bindValue(3,$prod_id);
+            $sql->bindValue(4,$cotd_precio);
+            $sql->bindValue(5,$cotd_cantidad);
+            $sql->execute();
+        }
     }
 ?>

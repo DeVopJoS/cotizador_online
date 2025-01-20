@@ -44,7 +44,7 @@
                 <div class="col-md-3">
                     <div class="form-group">
                         <label>&nbsp</label>
-                        <button type="button" class="btn btn-primary btn-block">Agregar</button>
+                        <button type="button" id="btnagregar1" class="btn btn-primary btn-block">Agregar</button>
                     </div>
                 </div>
                 

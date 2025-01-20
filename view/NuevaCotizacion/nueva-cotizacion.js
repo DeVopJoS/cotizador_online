@@ -88,39 +88,91 @@ $(document).ready( function() {
 });
   
 $(document).on('click', '#btnsiguiente1', function(){
-    $('#panel1').addClass('hide');
-    $('#panel2').removeClass('hide');
+    
+    let cot_id      = $('#cot_id').val();    
+    let cli_id      = $('#cli_id').val();
+    let con_id      = $('#con_id').val();
+    let cli_ci      = $('#cli_ci').val();
+    let con_tel     = $('#con_tel').val();
+    let con_email   = $('#con_email').val();
+    let cot_descrip = $('#cot_descrip').val();    
 
-    var cli_id      = $('#cli_id').val();
-    var con_id      = $('#con_id').val();
-    var cli_ci      = $('#cli_ci').val();
-    var con_tel     = $('#con_tel').val();
-    var con_email   = $('#con_email').val();
-    var cot_descrip = $('#cot_descrip').val();    
+    if(cli_id== "" || con_id== "" || cli_ci== "" || con_tel== "" || con_email== "" ){
+        $.gritter.add({
+            title: "Error",
+            text: "Campos vacios.",
+            fade: true,
+            speed: "medium"
+        });
+    } else {
+        $.ajax({
+            url:"../../controller/cotizacion.php?op=guardar",
+            type:"POST",
+            data:{
+                cot_id: cot_id,
+                cli_id: cli_id,
+                con_id: con_id,
+                cli_ci: cli_ci,
+                con_tel: con_tel,
+                con_email: con_email,
+                cot_descrip: cot_descrip
+            },
+            dataType: "json",
+            success:function(data){
+                $('#mdlCarga').modal('show');
+                setTimeout(() => {
+                    $('#cot_id').val(data.cot_id);
+                }, "500");   
+                $('#mdlCarga').modal('hide');    
+                console.log(data.cot_id);
+            }
+        });
 
-    $.ajax({
-        url:"../../controller/cotizacion.php?op=guardar",
-        type:"POST",
-        data:{
-            cli_id: cli_id,
-            con_id: con_id,
-            cli_ci: cli_ci,
-            con_tel: con_tel,
-            con_email: con_email,
-            cot_descrip: cot_descrip
-        },
-        dataType: "json",
-        success:function(data){
-            $('#mdlCarga').modal('show');
-            setTimeout(() => {
-                
-            }, "2000");   
-            $('#mdlCarga').modal('hide');         
-        }
-    });
+        $('#panel1').addClass('hide');
+        $('#panel2').removeClass('hide');
+    }
+
+});
+
+$(document).on('click', '#btnagregar1', function(){
+    let cot_id = $('#cot_id').val();
+    let cat_id = $('#cat_id').val();
+    let prod_id = $('#prod_id').val();
+    let cotd_precio = $('#cotd_precio').val();
+    let cotd_cant = $('#cotd_cant').val();
+
+    if(cat_id == "" || prod_id == "" || cotd_precio == "" || cotd_cant == ""){
+        $.gritter.add({
+            title: "Error",
+            text: "Campos vacios.",
+            fade: true,
+            speed: "medium"
+        });
+    } else {
+        $.ajax({
+            url:"../../controller/cotizacion.php?op=dguardar",
+            type:"POST",
+            data:{
+                cot_id: cot_id,
+                cat_id: cat_id,
+                prod_id: prod_id,
+                cotd_precio: cotd_precio,
+                cotd_cant: cotd_cant,
+            },
+            dataType: "json",
+            success:function(data){
+                $('#mdlCarga').modal('show');
+                setTimeout(() => {
+                    
+                }, "500");   
+                $('#mdlCarga').modal('hide');    
+            }
+        });
+    }
 });
 
 $(document).on('click', '#btnsiguiente2', function(){
+
     $('#panel2').addClass('hide');
     $('#panel3').removeClass('hide');
 });

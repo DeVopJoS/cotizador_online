@@ -8,6 +8,7 @@
         </div>
     </div>
     <div class="panel-body">
+        <input type="hidden" id="cot_id" name="cot_id">
         <fieldset>
             <div class="form-group">
                 <label for="cli_id">Cliente</label>
