@@ -32,7 +32,7 @@
 
             <div class="form-group">
                 <label for="con_email">Email Contacto</label>
-                <input type="text" class="form-control" id="con_email" name="con_email" placeholder="Telefono" required>
+                <input type="text" class="form-control" id="con_email" name="con_email" placeholder="Correo Electrónico" required>
             </div>
 
             <div class="form-group">

@@ -59,6 +59,8 @@
                                 <th class="text-nowrap">Cantidad</th>
                                 <th class="text-nowrap">Profit</th>
                                 <th class="text-nowrap">Total</th>
+                                <th width="1%"></th>
+                                <th width="1%"></th>
                             </tr>
                         </thead>
                         <tbody>
