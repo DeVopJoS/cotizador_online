@@ -102,7 +102,10 @@ $(document).on('click', '#btnsiguiente1', function(){
             title: "Error",
             text: "Campos vacios.",
             fade: true,
-            speed: "medium"
+            sticky: false,
+            time: 1000,
+            speed: "medium",
+            image: "../../assets/img/advertencia.png"
         });
     } else {
         $.ajax({
@@ -144,9 +147,11 @@ $(document).on('click', '#btnagregar1', function(){
     if(cat_id == "" || prod_id == "" || cotd_precio == "" || cotd_cant == ""){
         $.gritter.add({
             title: "Error",
-            text: "Campos vacios.",
+            text: "Campos flksdjfgvacios.",
             fade: true,
-            speed: "medium"
+            sticky: 3000,
+            speed: "medium",
+            image: "../../assets/img/advertencia.png"
         });
     } else {
         $.ajax({
