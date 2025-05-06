@@ -160,13 +160,22 @@ $(document).on('click', '#btnagregar1', function(){
                 cotd_cant: cotd_cant,
             },
             dataType: "json",
-            success:function(data){
+            beforeSend: function () {
                 $('#mdlCarga').modal('show');
-                setTimeout(() => {
+            },
+            success:function(data){ 
+                // setTimeout(() => {
                     
-                }, "1000"); 
+                // }, "1000"); 
                 listard(cot_id);
+                console.log(data)
                 
+                $('#mdlCarga').modal('hide');    
+            },
+            error: function (xhr, status, error) {
+                console.log('Status: ', status);
+                console.log('Error: ', error);
+                console.log('Response Text: ', xhr.responseText);
                 $('#mdlCarga').modal('hide');    
             }
         });
@@ -200,6 +209,7 @@ $(document).on('click', '#btnanterior4', function(){
 });
 
 function listard(cot_id){
+    console.log('recargando tabla')
     $("#table_data").DataTable ({
         "aProcessing": true,
         "aServerSide": true,

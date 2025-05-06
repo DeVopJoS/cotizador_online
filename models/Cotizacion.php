@@ -3,6 +3,7 @@
         
         public function insert_cotizacion($cli_id, $con_id, $cli_ci, $con_tel, $con_email, $cot_descrip){
             $conectar=parent::conexion();
+            parent::set_name();
             $sql="CALL sp_i_cotizacion_01(?,?,?,?,?,?)";
             $sql=$conectar->prepare($sql);
             $sql->bindValue(1,$cli_id);
