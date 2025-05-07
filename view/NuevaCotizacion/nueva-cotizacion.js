@@ -88,7 +88,6 @@ $(document).ready( function() {
 });
   
 $(document).on('click', '#btnsiguiente1', function(){
-    
     let cot_id      = $('#cot_id').val();    
     let cli_id      = $('#cli_id').val();
     let con_id      = $('#con_id').val();
@@ -98,15 +97,7 @@ $(document).on('click', '#btnsiguiente1', function(){
     let cot_descrip = $('#cot_descrip').val();    
 
     if(cli_id== "" || con_id== "" || cli_ci== "" || con_tel== "" || con_email== "" ){
-        $.gritter.add({
-            title: "Error",
-            text: "Campos vacios.",
-            fade: true,
-            sticky: false,
-            time: 1000,
-            speed: "medium",
-            image: "../../assets/img/advertencia.png"
-        });
+        showAlert('error', 'Error campos vacios.');
     } else {
         $.ajax({
             url:"../../controller/cotizacion.php?op=guardar",
@@ -127,6 +118,7 @@ $(document).on('click', '#btnsiguiente1', function(){
                     $('#cot_id').val(data.cot_id);
                 }, "500");   
                 $('#mdlCarga').modal('hide');    
+                showAlert('success', 'Su cotización se guardo en borradores.');
                 console.log(data.cot_id);
             }
         });
@@ -145,14 +137,7 @@ $(document).on('click', '#btnagregar1', function(){
     let cotd_cant = $('#cotd_cant').val();
 
     if(cat_id == "" || prod_id == "" || cotd_precio == "" || cotd_cant == ""){
-        $.gritter.add({
-            title: "Error",
-            text: "Campos flksdjfgvacios.",
-            fade: true,
-            sticky: 3000,
-            speed: "medium",
-            image: "../../assets/img/advertencia.png"
-        });
+        showAlert('error', 'Error campos vacios.');
     } else {
         $.ajax({
             url:"../../controller/cotizacion.php?op=dguardar",
@@ -169,12 +154,10 @@ $(document).on('click', '#btnagregar1', function(){
                 $('#mdlCarga').modal('show');
             },
             success:function(data){ 
-                // setTimeout(() => {
-                    
-                // }, "1000"); 
                 listard(cot_id);
-                console.log(data)
                 
+                showAlert('success', 'Item agregado con exito.');
+
                 $('#mdlCarga').modal('hide');    
             },
             error: function (xhr, status, error) {
@@ -214,7 +197,6 @@ $(document).on('click', '#btnanterior4', function(){
 });
 
 function listard(cot_id){
-    console.log('recargando tabla')
     $("#table_data").DataTable ({
         "aProcessing": true,
         "aServerSide": true,
@@ -259,5 +241,59 @@ function listard(cot_id){
                 "sSortDescending" : ": Activar para ordenar 1a columna de manera descendente"
             }
         },
+    });
+}
+
+function showAlert (type, _text){
+    let _image = '';
+    let _title = '';
+
+    if(type == 'error'){
+        _image = '../../assets/img/flaticon/error.png';
+        _title = 'Error';
+    } else if (type == 'success'){
+        _image = '../../assets/img/flaticon/success.png';
+        _title = 'Exito';
+    }
+
+    $.gritter.add({
+        title: _title,
+        text: _text,
+        time: 2000,
+        sticky: false,
+        speed: "medium",
+        image: _image
+    });
+}
+
+function editard(cotd_id){
+    console.log('editar ', cotd_id);
+}
+
+function eliminard(cotd_id){
+    $.ajax({
+        url:"../../controller/cotizacion.php?op=eliminard",
+        type:"POST",
+        data:{
+            cotd_id: cotd_id,
+        },
+        dataType: "json",
+        beforeSend: function () {
+            $('#mdlCarga').modal('show');
+        },
+        success:function(data){ 
+            const cot_id = $('#cot_id').val();
+            listard(cot_id);
+            
+            showAlert('success', 'Registro eliminado con exito!')
+
+            $('#mdlCarga').modal('hide');    
+        },
+        error: function (xhr, status, error) {
+            console.log('Status: ', status);
+            console.log('Error: ', error);
+            console.log('Response Text: ', xhr.responseText);
+            $('#mdlCarga').modal('hide');    
+        }
     });
 }

@@ -50,8 +50,8 @@ switch ($_GET['op']) {
             $sub_array[] = $row['cotd_cantidad'];
             $sub_array[] = $row['cotd_profit'];
             $sub_array[] = $row['cotd_total'];
-            $sub_array[] = '<button type="button" onClick="editar(' . $row['cotd_id'] . ')" id="' . $row['cotd_id'] . '" class="btn btn-success btn-icon btn-circle"><i class="fa fa-edit"></i></button>';
-            $sub_array[] = '<button type="button" onClick="eliminar(' . $row['cotd_id'] . ')" id="' . $row['cotd_id'] . '" class="btn btn-danger btn-icon btn-circle"><i class="fa fa-trash"></i></button>';
+            $sub_array[] = '<button type="button" onClick="editard(' . $row['cotd_id'] . ')" id="' . $row['cotd_id'] . '" class="btn btn-success btn-icon btn-circle"><i class="fa fa-edit"></i></button>';
+            $sub_array[] = '<button type="button" onClick="eliminard(' . $row['cotd_id'] . ')" id="' . $row['cotd_id'] . '" class="btn btn-danger btn-icon btn-circle"><i class="fa fa-trash"></i></button>';
             $data[] = $sub_array;
         }
 
@@ -62,5 +62,15 @@ switch ($_GET['op']) {
             'aaData' => $data
         );
         echo json_encode($results);
+        break;
+    case 'eliminard':
+        $datos = $cotizacion->eliminar_detalle($_POST['cotd_id']);
+        if(is_array($datos) && count($datos) > 0){
+            foreach($datos as $row){
+                $output['cotd_id'] = $row['cotd_id'];
+            }
+
+            echo json_encode($output);
+        }
         break;
 }

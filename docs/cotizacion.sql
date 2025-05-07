@@ -35,3 +35,12 @@ BEGIN
 
   SELECT LAST_INSERT_ID() AS 'cotd_id';
 END;
+
+
+CREATE PROCEDURE sp_d_dcotizacion_01(
+    IN pcotd_id INT
+)
+BEGIN
+    UPDATE td_cotizacion SET estado = 0, fecha_eliminacion=NOW() WHERE cotd_id=pcotd_id;
+    SELECT pcotd_id as cotd_id;
+END;

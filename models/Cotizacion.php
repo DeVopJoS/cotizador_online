@@ -51,5 +51,15 @@
             $query->execute();
             return $query->fetchAll(PDO::FETCH_ASSOC);
         }
+
+        public function eliminar_detalle($cotd_id){
+            $conectar=parent::conexion();
+            $sql="CALL sp_d_dcotizacion_01(?)";
+            $query=$conectar->prepare($sql);
+            $query->bindValue(1,$cotd_id);
+            $query->execute();
+
+            return $query->fetchAll();
+        }
     }
 ?>
