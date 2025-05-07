@@ -52,6 +52,27 @@
             return $query->fetchAll(PDO::FETCH_ASSOC);
         }
 
+        public function get_dcotizacion_x_cotd_id($cotd_id) {
+            $conectar=parent::conexion();
+            $sql="SELECT
+                td_cotizacion.cotd_id,
+                td_cotizacion.cot_id,
+                tm_categoria.cat_nom,
+                tm_producto.prod_nom,
+                td_cotizacion.cotd_precio,
+                td_cotizacion.cotd_cantidad,
+                td_cotizacion.cotd_profit,
+                td_cotizacion.cotd_total
+                FROM td_cotizacion
+                INNER JOIN tm_categoria ON td_cotizacion.cat_id = tm_categoria.cat_id
+                INNER JOIN tm_producto ON td_cotizacion.prod_id = tm_producto.prod_id
+                WHERE td_cotizacion.cotd_id = ? AND td_cotizacion.estado = 1;";
+            $query=$conectar->prepare($sql);
+            $query->bindValue(1, $cotd_id);
+            $query->execute();
+            return $query->fetchAll(PDO::FETCH_ASSOC);
+        }
+
         public function eliminar_detalle($cotd_id){
             $conectar=parent::conexion();
             $sql="CALL sp_d_dcotizacion_01(?)";

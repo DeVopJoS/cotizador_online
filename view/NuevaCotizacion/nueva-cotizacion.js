@@ -267,7 +267,21 @@ function showAlert (type, _text){
 }
 
 function editard(cotd_id){
-    console.log('editar ', cotd_id);
+    $('#mdlCarga').modal('show');
+
+    $.post("../../controller/cotizacion.php?op=dmostrar",{cotd_id:cotd_id}, function(data){
+        data = JSON.parse(data);
+        $("#cotd_id").val(data.cotd_id);
+        $("#cat_nom").val(data.cat_nom);
+        $("#prod_nom").val(data.prod_nom);
+        $("#cotd_cantidad_md").val(data.cotd_cantidad);
+        $("#cotd_profit_md").val(data.cotd_profit);
+        $("#cotd_total_md").val(data.cotd_total);
+        $("#cotd_precio_md").val(data.cotd_precio);
+
+        $('#mdlCarga').modal('hide');
+        $('#modald').modal('show')
+    });
 }
 
 function eliminard(cotd_id){

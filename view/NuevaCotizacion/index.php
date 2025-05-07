@@ -38,6 +38,8 @@
 	</div>
 	
 	<?php require_once("../Html/modal.php") ?>
+	
+	<?php require_once("modald.php") ?>
 
 	<?php require_once("../Html/Js.php") ?>
     

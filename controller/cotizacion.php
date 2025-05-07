@@ -73,4 +73,21 @@ switch ($_GET['op']) {
             echo json_encode($output);
         }
         break;
+    case 'dmostrar':
+        $datos = $cotizacion->get_dcotizacion_x_cotd_id($_POST['cotd_id']);
+        if(is_array($datos) && count($datos) > 0){
+            foreach($datos as $row){
+                $output['cotd_id'] = $row['cotd_id'];
+                $output['cot_id'] = $row['cot_id'];
+                $output['cat_nom'] = $row['cat_nom'];
+                $output['prod_nom'] = $row['prod_nom'];
+                $output['cotd_precio'] = $row['cotd_precio'];
+                $output['cotd_cantidad'] = $row['cotd_cantidad'];
+                $output['cotd_profit'] = $row['cotd_profit'];
+                $output['cotd_total'] = $row['cotd_total'];
+            }
+
+            echo json_encode($output);
+        }
+        break;
 }
