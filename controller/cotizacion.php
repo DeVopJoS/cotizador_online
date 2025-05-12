@@ -90,4 +90,14 @@ switch ($_GET['op']) {
             echo json_encode($output);
         }
         break;
+    case 'dactualizar':
+        $datos = $cotizacion->update_dcotizacion($_POST['cotd_id'], $_POST['cotd_cantidad'], $_POST['cotd_profit'], $_POST['cotd_precio']);
+        if(is_array($datos) && count($datos) > 0){
+            foreach($datos as $row){
+                $output['cotd_id'] = $row['pcotd_id'];
+            }
+
+            echo json_encode($output);
+        }
+        break;
 }

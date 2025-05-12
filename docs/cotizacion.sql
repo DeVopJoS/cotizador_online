@@ -37,6 +37,7 @@ BEGIN
 END;
 
 
+-- eliminar detalle cotizacion
 CREATE PROCEDURE sp_d_dcotizacion_01(
     IN pcotd_id INT
 )
@@ -44,3 +45,23 @@ BEGIN
     UPDATE td_cotizacion SET estado = 0, fecha_eliminacion=NOW() WHERE cotd_id=pcotd_id;
     SELECT pcotd_id as cotd_id;
 END;
+
+-- actualizar cotizacion
+DELIMITER //
+
+CREATE PROCEDURE sp_u_dcotizacion_01(
+    IN pcotd_id INT,
+    IN pcotd_cantidad INT,
+    IN pcotd_profit decimal(10, 2),
+    IN pcotd_precio DECIMAL(10,2);
+)
+BEGIN
+    DECLARE pcotd_total DECIMAL(10,2);
+    SET pcotd_total = (cotd_cantidad * pcotd_precio) + pcotd_profit;
+
+    UPDATE td_cotizacion SET cotd_profit = pcotd_profit, cotd_precio = pcotd_precio, cotd_cantidad = pcotd_cantidad, cotd_total = pcotd_total WHERE cotd_id = pcotd_id;
+
+    SELECT pcotd_id;
+END //
+
+DELIMITER ;

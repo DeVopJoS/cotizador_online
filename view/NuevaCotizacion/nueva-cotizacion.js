@@ -85,6 +85,33 @@ $(document).ready( function() {
             });
         });
     });
+
+    $('#cotd_cant').on('change', function() {
+        const precio = parseFloat($('#cotd_precio').val());
+        const cantidad = parseInt($(this).val());
+        const totalInput = $('#cotd_total');
+
+        if (!isNaN(precio) && !isNaN(cantidad)) {
+        const total = precio * cantidad;
+        totalInput.val(total.toFixed(2));
+        } else {
+        totalInput.val('');
+        }
+    });
+
+    $('#cotd_cantidad_md, #cotd_profit_md').on('change', function() {
+        const precio = parseFloat($('#cotd_precio_md').val());
+        const cantidad = parseInt($('#cotd_cantidad_md').val());
+        const profit = parseFloat($('#cotd_profit_md').val());
+        const totalInput = $('#cotd_total_md');
+
+        if (!isNaN(precio) && !isNaN(cantidad)) {
+            const total = (precio * cantidad) + profit;
+            totalInput.val(total.toFixed(2));
+        } else {
+            totalInput.val('');
+        }
+    });
 });
   
 $(document).on('click', '#btnsiguiente1', function(){
@@ -159,6 +186,50 @@ $(document).on('click', '#btnagregar1', function(){
                 showAlert('success', 'Item agregado con exito.');
 
                 $('#mdlCarga').modal('hide');    
+            },
+            error: function (xhr, status, error) {
+                console.log('Status: ', status);
+                console.log('Error: ', error);
+                console.log('Response Text: ', xhr.responseText);
+                $('#mdlCarga').modal('hide');    
+            }
+        });
+    }
+});
+
+$(document).on('click', '#btnactualizard', function(){
+    const cot_id = $('#cot_id').val();
+
+    const cotd_id = $('#cotd_id').val();
+    const cotd_cantidad = $('#cotd_cantidad_md').val();
+    const cotd_profit = $('#cotd_profit_md').val();
+    const cotd_total = $('#cotd_total_md').val();
+    const cotd_precio = $('#cotd_precio_md').val();
+
+    if(cotd_id == "" || cotd_cantidad == "" || cotd_profit == "" || cotd_total == "" || cotd_precio == ""){
+        showAlert('error', 'Error campos vacios.');
+    } else {
+        $.ajax({
+            url:"../../controller/cotizacion.php?op=dactualizar",
+            type:"POST",
+            data:{
+                cotd_id: cotd_id,
+                cotd_cantidad: cotd_cantidad,
+                cotd_profit: cotd_profit,
+                cotd_total: cotd_total,
+                cotd_precio: cotd_precio,
+            },
+            dataType: "json",
+            beforeSend: function () {
+                $('#mdlCarga').modal('show');
+            },
+            success:function(data){ 
+                listard(cot_id);
+                $('#mdlCarga').modal('hide');    
+                
+                showAlert('success', 'Item actualizado con exito.');
+                
+                $('#modald').modal('hide');    
             },
             error: function (xhr, status, error) {
                 console.log('Status: ', status);

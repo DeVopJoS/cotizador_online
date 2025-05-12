@@ -82,5 +82,18 @@
 
             return $query->fetchAll();
         }
+
+        public function update_dcotizacion($pcotd_id, $pcotd_cantidad, $pcotd_profit, $cotd_precio){
+            $conectar = parent::conexion();
+            $sql = "CALL sp_u_dcotizacion_01(?,?,?,?)";
+            $query=$conectar->prepare($sql);
+            $query->bindValue(1, $pcotd_id);
+            $query->bindValue(2, $pcotd_cantidad);
+            $query->bindValue(3, $cotd_precio);
+            $query->bindValue(4, $pcotd_profit);
+            $query->execute();
+
+            return $query->fetchAll();
+        }
     }
 ?>
